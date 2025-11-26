@@ -1,0 +1,2 @@
+# critico
+Critico repositório
