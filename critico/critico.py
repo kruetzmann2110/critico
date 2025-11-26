@@ -8,7 +8,7 @@ class Critico:
     A class for performing critical analysis and reviews
     """
     
-    def __init__(self, name="Critico"):
+    def __init__(self, name: str = "Critico"):
         """
         Initialize a Critico instance
         
@@ -18,7 +18,7 @@ class Critico:
         self.name = name
         self.reviews = []
     
-    def add_review(self, item, rating, comment=""):
+    def add_review(self, item: str, rating: int, comment: str = "") -> dict:
         """
         Add a review for an item
         
@@ -42,16 +42,16 @@ class Critico:
         self.reviews.append(review)
         return review
     
-    def get_reviews(self):
+    def get_reviews(self) -> list:
         """
         Get all reviews
         
         Returns:
-            list: List of all reviews
+            list: A copy of all reviews
         """
-        return self.reviews
+        return self.reviews.copy()
     
-    def get_average_rating(self):
+    def get_average_rating(self) -> float:
         """
         Calculate the average rating of all reviews
         

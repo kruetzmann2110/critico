@@ -40,6 +40,15 @@ class TestCritico(unittest.TestCase):
         reviews = self.critic.get_reviews()
         self.assertEqual(len(reviews), 2)
     
+    def test_get_reviews_returns_copy(self):
+        """Test that get_reviews returns a copy, not a reference"""
+        self.critic.add_review("Item 1", 4)
+        reviews = self.critic.get_reviews()
+        # Modify the returned list
+        reviews.append({"item": "Fake", "rating": 1, "comment": "", "critic": "Fake"})
+        # Internal state should not be affected
+        self.assertEqual(len(self.critic.get_reviews()), 1)
+    
     def test_average_rating_empty(self):
         """Test average rating with no reviews"""
         self.assertEqual(self.critic.get_average_rating(), 0.0)
