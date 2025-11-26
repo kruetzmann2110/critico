@@ -42,12 +42,24 @@ class TestCritico(unittest.TestCase):
     
     def test_get_reviews_returns_copy(self):
         """Test that get_reviews returns a copy, not a reference"""
-        self.critic.add_review("Item 1", 4)
+        self.critic.add_review("Item 1", 4, "Good")
         reviews = self.critic.get_reviews()
         # Modify the returned list
         reviews.append({"item": "Fake", "rating": 1, "comment": "", "critic": "Fake"})
         # Internal state should not be affected
         self.assertEqual(len(self.critic.get_reviews()), 1)
+    
+    def test_get_reviews_deep_copy(self):
+        """Test that modifying returned review dicts doesn't affect internal state"""
+        self.critic.add_review("Item 1", 4, "Good")
+        reviews = self.critic.get_reviews()
+        # Modify a review dictionary
+        reviews[0]["rating"] = 1
+        reviews[0]["comment"] = "Changed"
+        # Internal state should not be affected
+        original_reviews = self.critic.get_reviews()
+        self.assertEqual(original_reviews[0]["rating"], 4)
+        self.assertEqual(original_reviews[0]["comment"], "Good")
     
     def test_average_rating_empty(self):
         """Test average rating with no reviews"""

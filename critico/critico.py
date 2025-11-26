@@ -47,9 +47,9 @@ class Critico:
         Get all reviews
         
         Returns:
-            list: A copy of all reviews
+            list: A deep copy of all reviews
         """
-        return self.reviews.copy()
+        return [review.copy() for review in self.reviews]
     
     def get_average_rating(self) -> float:
         """
